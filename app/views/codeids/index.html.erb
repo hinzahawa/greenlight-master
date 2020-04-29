@@ -1,0 +1,57 @@
+
+<div class="background">
+  <div class="container">
+    <div class="row" id="invite-code">
+        <h3>Invite Code</h3>
+    </div>
+    <div class="row"  id="invite-code"> 
+      <%= form_tag codeids_path, :method=> "get" ,:id=>"form-search" do %>
+      <div class="form-group">
+                    <div class="input-icon">
+                        <input class="form-control" id="search" name="search" placeholder="Invite code" onchange="getInvitecode()">
+                      <span class="input-icon-addon">
+                        <i class="fas fa-search"></i>
+                      </span>
+                    </div>
+                </div>
+          </div>
+      <% end %>
+    <div class="row"  id="invite-code">
+      <div  class="paginate"><%= paginate @codeid %></div>
+          <table class="table table-striped table-bordered">
+            <thead class="head-list">
+              <tr>
+                <th class="text-list">No.</th>
+                <th class="text-list">Invite Code</th>
+                <th class="text-list">Sale name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if !@codeid.empty? %>
+                <% @no=1%>
+                <% @codeid.each do |value| %>
+                <tr>
+                  <td><%= @no %></td>
+                  <td><%= value.invite_code %></td>
+                  <td><%= value.sale_name %></td>
+                </tr>
+                <% @no+=1%>
+                <% end %>
+              <% else %>
+              <tr>
+                  <td colspan="3">No data</td>
+                </tr>
+              <% end %>
+            </tbody>
+          <table>   
+          
+          <% if @button %>
+          <div class="back-btn">
+            <%= link_to '<button type="button" class="btn btn-outline-primary mx-2">Back</button>'.html_safe, codeids_path %>
+          </div>
+          <% end %>
+          
+          <div class="paginate"><%= paginate @codeid %></div>
+    </div>
+  </div>
+</div>

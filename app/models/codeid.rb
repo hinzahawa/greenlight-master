@@ -1,0 +1,3 @@
+class Codeid < ApplicationRecord
+  
+end
