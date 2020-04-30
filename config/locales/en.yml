@@ -244,6 +244,7 @@ en:
       help: Need help?
       home: Home
       settings: Profile
+      invite_code: InviteCode
       signout: Sign out
   home_room: Home Room
   info_update_success: Information successfully updated.
