@@ -64,7 +64,6 @@ class SessionsController < ApplicationController
   # POST /users/login
   def create
     logger.info "Support: #{session_params[:email]} is attempting to login."
-
     user = User.include_deleted.find_by(email: session_params[:email].downcase)
 
     is_super_admin = user&.has_role? :super_admin
@@ -93,8 +92,16 @@ class SessionsController < ApplicationController
         return redirect_to(account_activation_path(token: user.activation_token))
       end
     end
+    # reset_session
 
-    login(user)
+    if session[:already_login].nil?
+      login(user)
+    else
+      if session[:already_login] == user.email
+        redirect_to root_path, flash: { alert: I18n.t("registration.banned.fail") }
+      end
+    end
+    # login(user)
   end
 
   # GET /users/logout

@@ -20,8 +20,8 @@ namespace :user do
       u[:name] = "Administrator" if u[:name].blank?
       u[:password] = Rails.configuration.admin_password_default if u[:password].blank?
       u[:email] = "admin@example.com" if u[:email].blank?
-      u[:phone_number] = "0000000000" if u[:phone_number].blank?
-      u[:invite_code] = 99999 if u[:invite_code].blank?
+      # u[:phone_number] = "0000000000" if u[:phone_number].blank?
+      # u[:invite_code] = 99999 if u[:invite_code].blank?
     elsif u[:name].blank? || u[:password].blank? || u[:email].blank? || u[:phone_number].blank? || u[:invite_code].blank?
       # Check that all fields exist
       puts "Missing Arguments"
