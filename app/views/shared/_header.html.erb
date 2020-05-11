@@ -26,7 +26,7 @@
 
       <div class="d-flex ml-auto">
         <% if current_user %>
-
+        
           <% if current_user.has_role? :super_admin %>
             <% admins_page = params[:controller] == "admins" && params[:action] == "index" ? "active" : "" %>
             <%= link_to admins_path, class: "px-3 mx-1 mt-1 header-nav #{admins_page}" do %>
@@ -59,9 +59,11 @@
               </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" x-placement="bottom-end">
+              <%#profile %>
               <%= link_to edit_user_path(current_user), class: "dropdown-item"  do %>
                 <i class="dropdown-icon fas fa-id-card mr-3"></i><%= t("header.dropdown.settings") %>
               <% end %>
+              <%#organization %>
               <% highest_role = current_user.highest_priority_role %>
               <% if highest_role.get_permission("can_manage_users") || highest_role.name == "super_admin" %>
                 <%= link_to admins_path, class: "dropdown-item" do %>
@@ -78,6 +80,12 @@
               <% elsif highest_role.get_permission("can_edit_roles")%>
                 <%= link_to admin_roles_path, class: "dropdown-item" do %>
                   <i class="dropdown-icon fas fa-user-tie mr-3"></i><%= t("header.dropdown.account_settings") %>
+                <% end %>
+              <% end %>
+              <%# codeid %>
+               <% if current_user.has_role? :super_admin %>
+                <%= link_to codeids_path, class: "dropdown-item"  do %>
+                  <i class="dropdown-icon fas fa-list-ol mr-3"></i><%= t("header.dropdown.invite_code") %>
                 <% end %>
               <% end %>
               <div class="dropdown-divider"></div>

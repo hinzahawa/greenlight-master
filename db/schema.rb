@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(version: 2020_04_24_040547) do
     t.string "image"
     t.string "phone_number"
     t.string "invite_code"
+    t.boolean "status", default: true
     t.string "password_digest"
     t.boolean "accepted_terms", default: false
     t.datetime "created_at", null: false
