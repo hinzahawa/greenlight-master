@@ -285,8 +285,11 @@ class User < ApplicationRecord
   def check_invite_code
     if !invite_code.blank?
       @codeid = Codeid.where(invite_code: invite_code).select(:id,:invite_code).first
+      @user_codeid = User.where(invite_code: invite_code).select(:id,:invite_code).first
       if @codeid.nil?
         errors.add(:invite_code, I18n.t("registration.codeid.fail"))
+      # elsif !@user_codeid.nil?
+      #   errors.add(:invite_code, I18n.t("registration.codeid.sign_up_fail"))
       end
     end
   end

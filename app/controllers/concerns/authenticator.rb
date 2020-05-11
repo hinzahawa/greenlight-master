@@ -27,16 +27,9 @@ module Authenticator
     @status.status = true
     @status.save
 
-    # p "session[:already_login] => #{session[:already_login]}"
-    # if session[:already_login].nil?
-      session[:user_id] = user.id
-      session[:already_login] = user.email
-      p "login #{session[:already_login]}"
-
-    # else
-      # if  session[:already_login] == user.name
-        # redirect_to root_path
-    # end
+    session[:user_id] = user.id
+    session[:already_login] = user.email
+    p "login #{session[:already_login]}"
 
     logger.info("Support: #{user.email} has successfully logged in.")
 
