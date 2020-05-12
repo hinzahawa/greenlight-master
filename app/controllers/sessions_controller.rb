@@ -93,14 +93,14 @@ class SessionsController < ApplicationController
       end
     end
 
-    # reset_session
-    if session[:already_login].nil?
-      login(user)
+    # check login overlap
+    @status = User.find(user.id)
+    if @status.status == true
+      redirect_to root_path, flash: { alert: I18n.t("registration.overlap") }
     else
-      if session[:already_login] == user.email
-        redirect_to root_path, flash: { alert: I18n.t("registration.banned.fail") }
-      end
+      login(user)
     end
+    
     # login(user)
   end
 
