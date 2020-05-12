@@ -92,8 +92,8 @@ class SessionsController < ApplicationController
         return redirect_to(account_activation_path(token: user.activation_token))
       end
     end
-    # reset_session
 
+    # reset_session
     if session[:already_login].nil?
       login(user)
     else

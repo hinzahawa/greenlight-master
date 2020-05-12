@@ -44,7 +44,7 @@ class User < ApplicationRecord
 
   validates :password, length: { minimum: 6 }, confirmation: true, if: :greenlight_account?, on: :create
   validates :phone_number, length: { minimum: 10, maximum: 10 },uniqueness: { case_sensitive: false, scope: :provider }
-  validates :invite_code, length: { maximum: 5 }, presence: true
+  validates :invite_code, length: { maximum: 5 }, presence: true, uniqueness: { case_sensitive: false, scope: :provider }
   validate :check_invite_code
 
   # Bypass validation if omniauth
@@ -285,8 +285,11 @@ class User < ApplicationRecord
   def check_invite_code
     if !invite_code.blank?
       @codeid = Codeid.where(invite_code: invite_code).select(:id,:invite_code).first
+      @user_codeid = User.where(invite_code: invite_code).select(:id,:invite_code).first
       if @codeid.nil?
         errors.add(:invite_code, I18n.t("registration.codeid.fail"))
+      # elsif !@user_codeid.nil?
+      #   errors.add(:invite_code, I18n.t("registration.codeid.sign_up_fail"))
       end
     end
   end
