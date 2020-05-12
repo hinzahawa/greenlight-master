@@ -43,8 +43,8 @@ class User < ApplicationRecord
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
 
   validates :password, length: { minimum: 6 }, confirmation: true, if: :greenlight_account?, on: :create
-  validates :phone_number, length: { minimum: 10, maximum: 10 },uniqueness: { case_sensitive: false, scope: :provider }
-  validates :invite_code, length: { maximum: 5 }, presence: true, uniqueness: { case_sensitive: false, scope: :provider }
+  validates :phone_number, length: { minimum: 10,maximum: 10 }, presence: true, uniqueness: { case_sensitive: false, scope: :provider, message: I18n.t("registration.codeid.used") }
+  validates :invite_code, length: { maximum: 5 }, presence: true, uniqueness: { case_sensitive: false, scope: :provider,message: I18n.t("registration.codeid.used")  }
   validate :check_invite_code
 
   # Bypass validation if omniauth
