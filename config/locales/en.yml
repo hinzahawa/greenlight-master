@@ -454,6 +454,7 @@ en:
     codeid:
       fail: isn't match.
       used: has already been used.
+    overlap: Your email Currently logged in
   remove: Remove
   rename: Rename
   reset_password:

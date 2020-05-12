@@ -28,8 +28,6 @@ module Authenticator
     @status.save
 
     session[:user_id] = user.id
-    session[:already_login] = user.email
-    p "login #{session[:already_login]}"
 
     logger.info("Support: #{user.email} has successfully logged in.")
 
@@ -74,7 +72,6 @@ module Authenticator
     @status = User.find(current_user.id)
     @status.status = false
     @status.save
-    session[:already_login] = nil
     session.delete(:user_id) if current_user
   end
 
