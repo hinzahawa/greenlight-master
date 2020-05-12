@@ -452,7 +452,7 @@ en:
       fail: Your token is either invalid or has expired. If you believe this is a mistake, please contact your administrator.
       no_invite: You do not have an invitation to join. Please contact your administrator to receive one.
     codeid:
-      fail : isn't match. 
+      fail: isn't match.
       sign_up_fail: has already been used.
   remove: Remove
   rename: Rename

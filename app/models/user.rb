@@ -44,7 +44,7 @@ class User < ApplicationRecord
 
   validates :password, length: { minimum: 6 }, confirmation: true, if: :greenlight_account?, on: :create
   validates :phone_number, length: { minimum: 10, maximum: 10 },uniqueness: { case_sensitive: false, scope: :provider }
-  validates :invite_code, length: { maximum: 5 }, presence: true
+  validates :invite_code, length: { maximum: 5 }, presence: true, uniqueness: { case_sensitive: false, scope: :provider }
   validate :check_invite_code
 
   # Bypass validation if omniauth

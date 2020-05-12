@@ -35,6 +35,7 @@ class UsersController < ApplicationController
     @user.provider = @user_domain
     @codeid = Codeid.where(invite_code: @user.invite_code).select(:invite_code).first
     @user_codeid = User.where(invite_code: @user.invite_code).select(:invite_code).first
+    p "@user_codeid => #{@user_codeid.nil?}"
     # User or recpatcha is not valid
       render("sessions/new") && return unless valid_user_or_captcha
     # Redirect to root if user token is either invalid or expired
@@ -56,8 +57,9 @@ class UsersController < ApplicationController
             # @user.create_activation_token
             send_activation_email(@user)
             redirect_to root_path
+          else
         end          
-      # else
+      else
       #   redirect_back(fallback_location: root_path,flash: { alert: I18n.t("registration.codeid.fail") })
       end
   end
