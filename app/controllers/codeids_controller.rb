@@ -7,17 +7,18 @@ class CodeidsController < ApplicationController
     # else
     #   @codeid = @codeid.page(params[:page]).per(10)
     # end
-    if !params[:search].nil?
-      @codeid = Codeid.where(invite_code: params[:search])
-      .or(Codeid.where(sale_name: params[:search])).page(params[:page]).per(100) 
-      @button = true
-      p @codeid
-    else
-      @codeid = Codeid.order(:id).page(params[:page]).per(100) 
-      @button = false
+    @super_admin = current_user.has_role?(:super_admin)
+    if @super_admin == true
+      if !params[:search].nil?
+        @codeid = Codeid.where(invite_code: params[:search])
+        .or(Codeid.where(sale_name: params[:search])).page(params[:page]).per(100) 
+        @button = true
+        p @codeid
+      else
+        @codeid = Codeid.order(:id).page(params[:page]).per(100) 
+        @button = false
+      end
     end
-    
-
   end
 
   def show

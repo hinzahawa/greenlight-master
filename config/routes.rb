@@ -17,8 +17,6 @@
 # with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 
 Rails.application.routes.draw do
-  #invite_code
-  resources :codeids 
 
   get '/health_check', to: 'health_check#all'
 
@@ -66,6 +64,8 @@ Rails.application.routes.draw do
     patch 'roles/order', to: 'admins#change_role_order', as: :admin_roles_order
     post '/role/:role_id', to: 'admins#update_role', as: :admin_update_role
     delete 'role/:role_id', to: 'admins#delete_role', as: :admin_delete_role
+    # Invite_code
+    resources :codeids 
   end
 
   scope '/themes' do
